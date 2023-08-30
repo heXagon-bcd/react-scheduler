@@ -27,13 +27,13 @@ console.log("props interviewr.",props.interviewer)
         name="name"
         type="text"
         placeholder="Enter Student Name"
-        onChange={(event) => setStudent(event.target.value)}
+        onChange={event => setStudent(event.target.value)}
         value={student}
       />
     </form> 
     <InterviewerList 
       interviewers={props.interviewers}
-      onChange={(id) => setInterviewer(id)}//id is arbitrar>?
+      onChange={id => setInterviewer(id)}//id is arbitrar>?
       onCancel={reset}
       value={interviewer}
     />
@@ -44,7 +44,7 @@ console.log("props interviewr.",props.interviewer)
       onClick={cancelButtonClick}
       >Cancel</Button>
       <Button confirm
-      onClick={props.onSave(student, interviewer)}
+      onClick={() => props.onSave(student, interviewer)}
        >Save</Button>
     </section>
   </section>
