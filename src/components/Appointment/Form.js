@@ -15,7 +15,8 @@ export default function Form (props) {
     props.onCancel();//jsx vs js syntax
   }
 
-console.log("props interviewr.",props.interviewer)
+console.log("props interviewr.",props.interviewers)
+console.log("props Form.js.",props)
   return (
     <main className="appointment__card appointment__card--create">
   <section className="appointment__card-left">
@@ -41,7 +42,7 @@ console.log("props interviewr.",props.interviewer)
   <section className="appointment__card-right">
     <section className="appointment__actions">
       <Button danger//css built into react for danger
-      onClick={cancelButtonClick}
+      onClick={() => props.onCancel()}
       >Cancel</Button>
       <Button confirm
       onClick={() => props.onSave(student, interviewer)}
