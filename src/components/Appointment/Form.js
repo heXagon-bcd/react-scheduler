@@ -3,6 +3,7 @@ import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
 export default function Form (props) {
+  console.log("form.js", props)
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null)
 
@@ -42,7 +43,7 @@ console.log("props Form.js.",props)
   <section className="appointment__card-right">
     <section className="appointment__actions">
       <Button danger//css built into react for danger
-      onClick={() => props.onCancel()}
+      onClick={() => props.onCancel}
       >Cancel</Button>
       <Button confirm
       onClick={() => props.onSave(student, interviewer)}
