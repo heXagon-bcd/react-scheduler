@@ -23,7 +23,8 @@ export default function Appointment(props) {
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE"
   const ERROR_DELETE = "ERROR_DELETE"
-  const CONFIRM = "CONFIRM"
+  const CONFIRM_DELETE = "CONFIRM_DELETE"
+  const CONFIRM_EDIT = "CONFIRM_EDIT"
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -62,7 +63,7 @@ export default function Appointment(props) {
   }
 
   function confirm(){
-    transition(CONFIRM, true)
+    transition(CONFIRM_DELETE, true)
   }
 
   return (
@@ -76,7 +77,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           id={props.id}
-          onDelete={() => transition(CONFIRM)}
+          onDelete={() => transition(CONFIRM_DELETE)}
           onEdit={edit}
         />
       )}
@@ -113,14 +114,22 @@ export default function Appointment(props) {
         onClose={back}
         />
       )}
-      {mode === CONFIRM && (
+      {mode === CONFIRM_DELETE && (
         <Confirm
         message="Are you sure you want to delete"
         onCancel={back}
         onConfirm={cancel}
         />
-      )
-      }
+      )}
+
+      {mode === CONFIRM_EDIT && (
+        <Confirm
+        message="Are you sure you want to edit"
+        onCancel={back}
+        onConfirm={cancel}
+        />
+      )}  
+
     </article>
   );
 }

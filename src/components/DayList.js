@@ -8,6 +8,7 @@ export default function DayList(props){
   
   console.log("map",props.days.map((e) => {return e}))
   console.log("day", props.day)
+  console.log("state appointments", props.appointments)
   const listItem = props.days.map(item => {
     return(
       <DayListItem 
@@ -15,7 +16,9 @@ export default function DayList(props){
         name={item.name} 
         spots={item.spots} 
         selected={item.name === props.day}//review
-        setDay={props.onChange}  
+        setDay={props.onChange}
+        appointmentNumber={item.appointments}
+        appointments={props.appointments}
       />
     )
   })

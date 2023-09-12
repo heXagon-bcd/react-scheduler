@@ -7,109 +7,42 @@ import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 import "components/Application.scss";
 import useVisualMode from "hooks/useVisualMode";
+import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
-    // you may put the line below, but will have to remove/comment hardcoded appointments variable
-    appointments: {},
-    interviewers: {}
-  });
- 
-  const setDay = day => setState(prev => ({ ...prev, day }));
-  const setDays = days => setState({ ...state, days });
-  useEffect(() => {
-    Promise.all([
-      axios.get("/api/days"),
-      axios.get("/api/appointments"),
-      axios.get("/api/interviewers"),
-    ]).then((all) =>{
-      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-      console.log("all states",all[0].data,all[1].data,all[2].data)
-      console.log(all[0].data)
-    })
-  },[])
-  // useEffect(() => {
-  //   const url = "/api/days";
-  //   axios.get(url)
-  //   .then((response) => {
-  //     console.log("response", response)
-  //     console.log("object values response", Object.values(response.data))
-  //     setDays(Object.values(response.data))
-  //   })
-  // },[]);
-
-  function bookInterview(id, interview) {
-    console.log("bookinterview", id, interview)
-    return axios.put(`/api/appointments/${id}`, {
-      interview
-    })
-    .then(response => {
-      if (response.status === 204) {
-        const appointment = {
-          ...state.appointments[id],
-          interview: { ...interview }
-        };
-  
-        const appointments = {
-          ...state.appointments,
-          [id]: appointment
-        };
-  
-        setState({
-          ...state,
-          appointments
-        });
-      }
-    });
-  }
-
-  function cancelInterview(id, interview) {
-    return axios.delete(`/api/appointments/${id}`)
-    .then(response => {
-      if (response.status === 204) {
-        const appointment = {
-          ...state.appointments[id],
-          interview : null
-        }
-        console.log("cancelInterview appointment", appointment)
-        const appointments = {
-          ...state.appointments,
-          id: appointment
-        }
-        console.log("cancelInterview appointments", appointments)
-        setState({
-          ...state,
-          appointments
-        });
-      }
-    })
-
-  }
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview, 
+    updateSpots
+  } = useApplicationData();
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const schedule = dailyAppointments.map((appointment) => {
+    console.log("state.days", state.days)
     const interview = getInterview(state, appointment.interview);
   
     const interviewers = getInterviewersForDay(state, state.day)
+   
 
-    return (
-      <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-        interviewers={interviewers}
-        bookInterview={bookInterview}
-        cancelInterview={cancelInterview}
-      />
-    );
+   return (
+        <Appointment
+          key={appointment.id}
+          {...appointment}
+          interview={getInterview(state, appointment.interview)}
+          interviewers={interviewers}
+          bookInterview={bookInterview}
+          cancelInterview={cancelInterview}
+          appointments={state.appointments}
+        />
+      );
   });
 
   console.log("daily appointments", dailyAppointments)
   console.log("state", state)
+
 
     return (
       <main className="layout">
@@ -122,7 +55,7 @@ export default function Application(props) {
           />
           <hr className="sidebar__separator sidebar--centered" />
           <nav className="sidebar__menu">
-            <DayList days={state.days} day={state.day} onChange={setDay} />
+            <DayList days={state.days} day={state.day} onChange={setDay} appointments={state.appointments} />
           </nav>
           <img
             className="sidebar__lhl sidebar--centered"
