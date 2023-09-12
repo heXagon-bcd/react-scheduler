@@ -21,7 +21,6 @@ function transition(newMode, replace = false) {
   
   function back() {
     if (history.length > 1) {
-      console.log("history", history)
       const newHistory = history.slice(0, history.length - 1); // remove last mode
       setHistory(newHistory);
       setMode(newHistory[newHistory.length - 1]); // set mode to the new last item in history

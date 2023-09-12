@@ -4,10 +4,9 @@ import InterviewerListItem from "./InterviewerListItem";
 import "components/InterviewerList.scss"
 
 export default function InterviewerList (props) {
-  console.log("onchange", props.onChange)
-  console.log("props.value", props.value)
+
   const interviewers = props.interviewers.map((interviewer) => {
-    console.log("interviewer.id",interviewer.id)
+
     return (
       <InterviewerListItem
         key={interviewer.id}
@@ -26,6 +25,3 @@ export default function InterviewerList (props) {
     </section>
   )
 }
-
-//anon call back function that does not pass the id. this will save development time
-//review git lens

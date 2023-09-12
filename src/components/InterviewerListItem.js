@@ -6,8 +6,6 @@ export default function InterviewerListItem(props) {
   const interviewClass = classNames("interviewers__item", {
     "interviewers__item--selected": props.selected,
   });
-  console.log("interviewlistitem props", props);
-  console.log("props.value- interviewerlistitem" ,props.value)
 
   return (
     <li onClick={() => props.onChange(props.id)} className={interviewClass}>
