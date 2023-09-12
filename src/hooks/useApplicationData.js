@@ -47,7 +47,7 @@ export default function useApplicationData(intial) {
       console.log("day",day)
       for(let appointmentID of day.appointments) {
         console.log("appointments[appointmentID]",appointments[appointmentID])
-        if(!appointments[appointmentID].interview) {//review
+        if(!appointments[appointmentID].interview) {
           count++
         }
       }
