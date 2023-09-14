@@ -2,19 +2,40 @@ import React, {useState} from "react";
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
-export default function Form (props) {
+
+ function Form (props) {
 
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null)
+  const [error, setError] = useState("");
+
 
   const reset = function () {
     setStudent("");
     setInterviewer(null);
   }
-  const cancelButtonClick = function () {
-    reset();
-    props.onCancel();//jsx vs js syntax
+
+  function validate() {
+    setError("");
+    console.log("Validating...");  // Debug line
+  
+    if (student === "") {
+      console.log("Student name is blank. Setting error...");  // Debug line
+      setError("Student name cannot be blank");
+      return;
+    }
+  
+    if (interviewer === null) {
+      console.log("Interviewer is null. Setting error...");  // Debug line
+      setError("Please select an interviewer");
+      return;
+    }
+  
+    // If it reached this point, no errors were found
+    console.log("No errors found. Calling onSave...");  // Debug line
+    props.onSave(student, interviewer);
   }
+  
   return (
     <main className="appointment__card appointment__card--create">
   <section className="appointment__card-left">
@@ -28,8 +49,10 @@ export default function Form (props) {
         placeholder="Enter Student Name"
         onChange={event => setStudent(event.target.value)}
         value={student}
+        data-testid="student-name-input"
       />
     </form> 
+    <section className="appointment__validation">{error}</section>
     <InterviewerList 
       interviewers={props.interviewers}
       onChange={id => setInterviewer(id)}//id is arbitrar>?
@@ -43,10 +66,14 @@ export default function Form (props) {
       onClick={() => props.onCancel()}
       >Cancel</Button>
       <Button confirm
-      onClick={() => props.onSave(student, interviewer)}
+      // onClick={() => props.onSave(student, interviewer)}
+      onClick={validate}
        >Save</Button>
     </section>
   </section>
 </main>
   )
 }
+
+
+export default Form

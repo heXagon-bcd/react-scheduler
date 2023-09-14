@@ -83,10 +83,10 @@ export default function useApplicationData(intial) {
 
   }
   return {
-    state, // <-- Add this
-    setDay, // <-- Add this
-    bookInterview, // <-- Add this
-    cancelInterview, // <-- Add this
+    state, 
+    setDay,
+    bookInterview, 
+    cancelInterview,
     updateSpots
   };
 }

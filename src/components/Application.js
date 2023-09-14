@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from "react";
-import Button from "./Button";
 import DayList from "./DayList";
-import DayListItem from "./DayListItem";
 import Appointment from "./Appointment";
-import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 import "components/Application.scss";
 import useVisualMode from "hooks/useVisualMode";
@@ -37,10 +34,6 @@ export default function Application(props) {
         />
       );
   });
-
-  console.log("daily appointments", dailyAppointments)
-  console.log("state", state)
-
 
     return (
       <main className="layout">
