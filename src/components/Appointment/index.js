@@ -67,7 +67,7 @@ export default function Appointment(props) {
   }
 
   return (
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       {mode === EMPTY && <Empty onAdd={() => {
         console.log("Clicked onAdd") 
       transition(CREATE)} } />
