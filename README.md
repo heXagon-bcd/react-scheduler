@@ -4,7 +4,8 @@ Main Portal
 
 Schedule your appointment!
 
-![image](https://github.com/heXagon-bcd/react-scheduler/assets/5097750/b15aa22a-25eb-4cd2-8473-e51ac5ec2789)
+![image](https://github.com/heXagon-bcd/react-scheduler/assets/5097750/afcdd284-9cae-495e-bc42-34ece86cb603)
+
 
 
 ## Overview
