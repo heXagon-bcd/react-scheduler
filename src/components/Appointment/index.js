@@ -11,9 +11,6 @@ import Confirm from "./Confirm";
 import "../../../src/components/Appointment/style.scss";
 
 export default function Appointment(props) {
-  console.log("index.js appt props +++++",props)
-  // console.log("props.interview.studetnt",props.interview.student)
-  // console.log("props.interview.interviewer", props.interview.interviewer)
 
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
@@ -69,7 +66,7 @@ export default function Appointment(props) {
   return (
     <article className="appointment" data-testid="appointment">
       {mode === EMPTY && <Empty onAdd={() => {
-        console.log("Clicked onAdd") 
+
       transition(CREATE)} } />
       }
       {mode === SHOW && (
