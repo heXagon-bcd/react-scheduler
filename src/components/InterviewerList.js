@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import "components/InterviewerList.scss";
 
 function InterviewerList(props) {
-  console.log("interviwerlistprops", props)
+  console.log("interviwerlistprops", props);
   const interviewers = props.interviewers.map((interviewer) => {
     return (
       <InterviewerListItem

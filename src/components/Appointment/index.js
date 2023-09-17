@@ -11,7 +11,7 @@ import Confirm from "./Confirm";
 import "../../../src/components/Appointment/style.scss";
 
 export default function Appointment(props) {
-  console.log("appointment props", props.interview)
+  console.log("appointment props", props.interview);
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
