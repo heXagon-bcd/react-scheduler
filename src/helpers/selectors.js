@@ -1,18 +1,19 @@
-export function getAppointmentsForDay(state, day) {
-  // Find the day in the state.days array
-  const selectDay = state.days.find((d) => d.name === day);
+function getDetailsForDay(state, day, key) {
+  const selectedDay = state.days.find((d) => d.name === day);
 
-  // If the day doesn't exist, return an empty array
-  if (!selectDay) {
+  if (!selectedDay) {
     return [];
   }
 
-  // Map the day's appointments IDs to their corresponding appointment details in state.appointments
-  const appointmentsForDay = selectDay.appointments.map(
-    (appointmentId) => state.appointments[appointmentId]
-  );
+  return selectedDay[key].map((id) => state[key][id]);
+}
 
-  return appointmentsForDay;
+export function getAppointmentsForDay(state, day) {
+  return getDetailsForDay(state, day, "appointments");
+}
+
+export function getInterviewersForDay(state, day) {
+  return getDetailsForDay(state, day, "interviewers");
 }
 
 export function getInterview(state, interview) {
@@ -24,21 +25,4 @@ export function getInterview(state, interview) {
     student: interview.student,
     interviewer: state.interviewers[interview.interviewer],
   };
-}
-
-export function getInterviewersForDay(state, day) {
-  // Find the day in the state.days array
-  const selectDay = state.days.find((d) => d.name === day);
-
-  // If the day doesn't exist, return an empty array
-  if (!selectDay) {
-    return [];
-  }
-
-  // Map the day's appointments IDs to their corresponding appointment details in state.appointments
-  const InterviewersForDay = selectDay.interviewers.map(
-    (interviewerId) => state.interviewers[interviewerId]
-  );
-
-  return InterviewersForDay;
 }
