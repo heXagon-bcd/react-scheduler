@@ -19,6 +19,7 @@ export default function useVisualMode(initial) {
   }
 
   function back() {
+    console.log("Back function called", { history, mode });
     if (history.length > 1) {
       const newHistory = history.slice(0, history.length - 1); // remove last mode
       setHistory(newHistory);

@@ -9,13 +9,14 @@ import InterviewerList from "components/InterviewerList";
   const [interviewer, setInterviewer] = useState(props.interviewer || null)
   const [error, setError] = useState("");
 
-
+  console.log("interviewer++", interviewer)
   const reset = function () {
     setStudent("");
     setInterviewer(null);
   }
 
   function validate() {
+    console.log("validate interviewer", interviewer)
     setError("");
     console.log("Validating...");  // Debug line
   

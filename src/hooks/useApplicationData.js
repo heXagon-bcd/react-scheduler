@@ -24,9 +24,9 @@ export default function useApplicationData(intial) {
         appointments: all[1].data,
         interviewers: all[2].data,
       }));
-      console.log("State", state);
     });
-  }, []);
+  },[]);
+
 
   function updateSpots(appointments) {
     const result = state.days.map((day) => {
