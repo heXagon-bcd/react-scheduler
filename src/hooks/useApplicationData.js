@@ -11,7 +11,6 @@ export default function useApplicationData(intial) {
   });
 
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
-  const setDays = (days) => setState({ ...state, days });
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
